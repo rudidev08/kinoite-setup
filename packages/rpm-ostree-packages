@@ -1,0 +1,13 @@
+# Packages to layer with rpm-ostree
+# One package per line, comments start with #
+
+1password
+1password-cli
+code
+deskflow
+distrobox
+fish
+lutris
+mangohud
+liberation-fonts
+steam
