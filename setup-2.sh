@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=14
+TOTAL_STEPS=13
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -46,7 +46,7 @@ confirm_yes_no() {
 # PACKAGES and hooks are embedded by build.sh
 
 setup_2_300_rpm_ostree() {
-    local all_packages="1password 1password-cli code deskflow distrobox fish mangohud liberation-fonts steam"
+    local all_packages="1password 1password-cli code deskflow distrobox fish mangohud liberation-fonts"
     local selected=""
     local install_ffmpeg=""
 
@@ -132,7 +132,7 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="com.borgbase.Vorta com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.flattool.Warehouse io.github.kolunmi.Bazaar io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris org.fedoraproject.MediaWriter org.gnome.Weather org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="com.borgbase.Vorta com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.flattool.Warehouse io.github.kolunmi.Bazaar io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.gnome.Weather org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 
