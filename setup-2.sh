@@ -132,14 +132,14 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 
     step "flatpaks"
 
     # Remove pre-installed flatpaks
-    local all_removals="org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.kwrite"
+    local all_removals="org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.konsole org.kde.kwrite"
     echo "-- remove --"
     for app in $all_removals; do
         if confirm_yes_no "remove $app?"; then

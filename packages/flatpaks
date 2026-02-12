@@ -1,8 +1,13 @@
 # Flatpaks to install from flathub
 # One app ID per line, comments start with #
 
+# Ptyxis is a terminal designed for containerized environments (Flatpak, distrobox, toolbox)
+# and works better than Konsole on immutable desktops like Kinoite
+app.devsuite.Ptyxis
 com.fastmail.Fastmail
+io.github.dvlv.boxbuddy
 com.github.tchx84.Flatseal
+io.github.Faugus.faugus-launcher
 io.github.flattool.Warehouse
 io.missioncenter.MissionCenter
 it.mijorus.gearlever
