@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=10
+TOTAL_STEPS=9
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -46,7 +46,7 @@ confirm_yes_no() {
 # PACKAGES and hooks are embedded by build.sh
 
 setup_2_300_rpm_ostree() {
-    local all_packages="1password 1password-cli code deskflow distrobox fish"
+    local all_packages="1password 1password-cli deskflow distrobox fish"
     local selected=""
     local install_ffmpeg=""
 
@@ -95,16 +95,6 @@ repo_gpgcheck=1
 gpgkey=https://downloads.1password.com/linux/keys/1password.asc
 EOF
     fi
-    if [[ "$selected" == *"code"* ]]; then
-cat << 'EOF' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-[code]
-name=Visual Studio Code
-baseurl=https://packages.microsoft.com/yumrepos/vscode
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc
-EOF
-    fi
 
     # refresh repo metadata after hooks add repos
     rpm-ostree refresh-md
@@ -132,7 +122,7 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail io.github.dvlv.boxbuddy com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 

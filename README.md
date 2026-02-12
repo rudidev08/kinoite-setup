@@ -27,8 +27,8 @@ curl -O https://raw.githubusercontent.com/rudidev08/kinoite-setup/refs/heads/mai
 
 ### setup-2.sh (post-reboot)
 
-- Layer rpm-ostree packages: 1password, 1password-cli, VS Code, deskflow, distrobox, fish
-  - Adds 1password and VS Code yum repos if those packages are selected
+- Layer rpm-ostree packages: 1password, 1password-cli, deskflow, distrobox, fish
+  - Adds 1password yum repo if selected
 - AMD or Intel GPU video acceleration drivers with H.264/H.265 codec support (mesa-va-drivers-freeworld or intel-media-driver)
 - Replace ffmpeg-free with full ffmpeg from RPM Fusion
 - Remove pre-installed flatpaks: KMahjongg, KMines

@@ -10,7 +10,6 @@ RPM_PACKAGES=$(grep -v '^#' "$DATA_DIR/rpm-ostree-packages" | grep -v '^$' | tr 
 
 # Read repo contents
 REPO_1PASSWORD=$(cat "$DATA_DIR/repos/1password.repo")
-REPO_VSCODE=$(cat "$DATA_DIR/repos/vscode.repo")
 
 # Read flatpaks (filter comments/empty lines, join with spaces)
 FLATPAKS=$(grep -v '^#' "$DATA_DIR/flatpaks" | grep -v '^$' | tr '\n' ' ' | sed 's/ $//')
@@ -81,7 +80,6 @@ EOF
 
     # Replace repo placeholders last (they may be inside hooks) - use awk to avoid escaping issues
     awk -v repo="$REPO_1PASSWORD" '{gsub(/@@1PASSWORD_REPO@@/, repo); print}' "$output" > "$output.tmp" && mv "$output.tmp" "$output"
-    awk -v repo="$REPO_VSCODE" '{gsub(/@@VSCODE_REPO@@/, repo); print}' "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
     # Count and replace @@TOTAL_STEPS@@
     # For setup-2: packages + fixed steps (GPU, codecs, flatpaks, wallpapers, fontconfig)
