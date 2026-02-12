@@ -4,8 +4,6 @@
 setup_2_300_rpm_ostree() {
     local all_packages="@@RPM_OSTREE_PACKAGES@@"
     local selected=""
-    local install_ffmpeg=""
-
     # Package selection
     for pkg in $all_packages; do
         if step_confirm "layer $pkg?"; then
@@ -31,10 +29,9 @@ setup_2_300_rpm_ostree() {
         esac
     done
 
-    # ffmpeg (from RPM Fusion)
-    step "codecs"
-    if confirm_yes_no "replace ffmpeg-free with ffmpeg (full codec support)?"; then
-        install_ffmpeg="yes"
+    # Codecs (from RPM Fusion)
+    if step_confirm "install libavcodec-freeworld (H.264/H.265 codec support)?"; then
+        selected="$selected libavcodec-freeworld"
     fi
 
     selected=$(echo "$selected" | xargs)
@@ -52,13 +49,7 @@ setup_2_300_rpm_ostree() {
         rpm-ostree install $selected
     fi
 
-    if [ -n "$install_ffmpeg" ]; then
-        echo ""
-        echo "Replacing ffmpeg-free with ffmpeg"
-        rpm-ostree override remove ffmpeg-free libavcodec-free libavdevice-free libavfilter-free libavformat-free libavutil-free libpostproc-free libswresample-free libswscale-free --install ffmpeg
-    fi
-
-    if [ -z "$selected" ] && [ -z "$install_ffmpeg" ]; then
+    if [ -z "$selected" ]; then
         echo ""
         echo "No packages selected"
     fi

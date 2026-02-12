@@ -5,7 +5,7 @@
 # and works better than Konsole on immutable desktops like Kinoite
 app.devsuite.Ptyxis
 com.fastmail.Fastmail
-io.github.dvlv.boxbuddy
+io.github.dvlv.boxbuddyrs
 com.github.tchx84.Flatseal
 io.github.Faugus.faugus-launcher
 io.github.flattool.Warehouse

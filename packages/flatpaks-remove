@@ -5,8 +5,3 @@
 org.kde.elisa
 org.kde.kmahjongg
 org.kde.kmines
-# replaced by app.devsuite.Ptyxis - Ptyxis is built for containerized environments
-# (distrobox, toolbox) and works better than Konsole on immutable desktops
-org.kde.konsole
-# replaced by org.kde.kate
-org.kde.kwrite

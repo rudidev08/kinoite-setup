@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=9
+TOTAL_STEPS=7
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -46,10 +46,8 @@ confirm_yes_no() {
 # PACKAGES and hooks are embedded by build.sh
 
 setup_2_300_rpm_ostree() {
-    local all_packages="1password 1password-cli deskflow distrobox fish"
+    local all_packages="1password 1password-cli distrobox fish"
     local selected=""
-    local install_ffmpeg=""
-
     # Package selection
     for pkg in $all_packages; do
         if step_confirm "layer $pkg?"; then
@@ -75,10 +73,9 @@ setup_2_300_rpm_ostree() {
         esac
     done
 
-    # ffmpeg (from RPM Fusion)
-    step "codecs"
-    if confirm_yes_no "replace ffmpeg-free with ffmpeg (full codec support)?"; then
-        install_ffmpeg="yes"
+    # Codecs (from RPM Fusion)
+    if step_confirm "install libavcodec-freeworld (H.264/H.265 codec support)?"; then
+        selected="$selected libavcodec-freeworld"
     fi
 
     selected=$(echo "$selected" | xargs)
@@ -106,13 +103,7 @@ EOF
         rpm-ostree install $selected
     fi
 
-    if [ -n "$install_ffmpeg" ]; then
-        echo ""
-        echo "Replacing ffmpeg-free with ffmpeg"
-        rpm-ostree override remove ffmpeg-free libavcodec-free libavdevice-free libavfilter-free libavformat-free libavutil-free libpostproc-free libswresample-free libswscale-free --install ffmpeg
-    fi
-
-    if [ -z "$selected" ] && [ -z "$install_ffmpeg" ]; then
+    if [ -z "$selected" ]; then
         echo ""
         echo "No packages selected"
     fi
@@ -122,14 +113,14 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail io.github.dvlv.boxbuddy com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail io.github.dvlv.boxbuddyrs com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 
     step "flatpaks"
 
     # Remove pre-installed flatpaks
-    local all_removals="org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.konsole org.kde.kwrite"
+    local all_removals="org.kde.elisa org.kde.kmahjongg org.kde.kmines"
     echo "-- remove --"
     for app in $all_removals; do
         if confirm_yes_no "remove $app?"; then
