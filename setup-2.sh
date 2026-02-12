@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=13
+TOTAL_STEPS=10
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -46,7 +46,7 @@ confirm_yes_no() {
 # PACKAGES and hooks are embedded by build.sh
 
 setup_2_300_rpm_ostree() {
-    local all_packages="1password 1password-cli code deskflow distrobox fish mangohud liberation-fonts"
+    local all_packages="1password 1password-cli code deskflow distrobox fish"
     local selected=""
     local install_ffmpeg=""
 
@@ -63,7 +63,7 @@ setup_2_300_rpm_ostree() {
         read -p "video acceleration driver? [a]md / [i]ntel / [n]one: " gpu_choice < /dev/tty
         case $gpu_choice in
             [Aa]* )
-                selected="$selected mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld"
+                selected="$selected mesa-va-drivers-freeworld"
                 break;;
             [Ii]* )
                 selected="$selected intel-media-driver"
@@ -132,17 +132,20 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="com.borgbase.Vorta com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.flattool.Warehouse io.github.kolunmi.Bazaar io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.gnome.Weather org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="com.fastmail.Fastmail com.github.tchx84.Flatseal io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 
     step "flatpaks"
 
     # Remove pre-installed flatpaks
+    local all_removals="org.kde.kmahjongg org.kde.kmines"
     echo "-- remove --"
-    if confirm_yes_no "remove KDE games (kmahjongg, kmines)?"; then
-        to_remove="org.kde.kmahjongg org.kde.kmines"
-    fi
+    for app in $all_removals; do
+        if confirm_yes_no "remove $app?"; then
+            to_remove="$to_remove $app"
+        fi
+    done
 
     if [ -n "$to_remove" ]; then
         echo "Removing: $to_remove"
@@ -187,47 +190,6 @@ setup_2_410_wallpapers() {
         rm -rf "$tmpdir"
 
         echo "Wallpapers installed to $dest"
-    fi
-}
-
-# Fontconfig: substitute Liberation fonts for MS fonts
-
-setup_2_420_fontconfig() {
-    step "fontconfig"
-    if confirm_yes_no "configure Liberation fonts as MS font substitutes?"; then
-        local config_dir="$HOME/.config/fontconfig"
-        mkdir -p "$config_dir"
-
-        cat > "$config_dir/fonts.conf" << 'FONTCONF'
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-  <!-- Substitute Liberation fonts for MS fonts -->
-  <alias>
-    <family>Arial</family>
-    <prefer><family>Liberation Sans</family></prefer>
-  </alias>
-  <alias>
-    <family>Helvetica</family>
-    <prefer><family>Liberation Sans</family></prefer>
-  </alias>
-  <alias>
-    <family>Times New Roman</family>
-    <prefer><family>Liberation Serif</family></prefer>
-  </alias>
-  <alias>
-    <family>Times</family>
-    <prefer><family>Liberation Serif</family></prefer>
-  </alias>
-  <alias>
-    <family>Courier New</family>
-    <prefer><family>Liberation Mono</family></prefer>
-  </alias>
-</fontconfig>
-FONTCONF
-
-        echo "Fontconfig updated: $config_dir/fonts.conf"
-        fc-cache -f
     fi
 }
 

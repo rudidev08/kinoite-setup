@@ -1,17 +1,14 @@
 # Flatpaks to install from flathub
 # One app ID per line, comments start with #
 
-com.borgbase.Vorta
 com.fastmail.Fastmail
 com.github.tchx84.Flatseal
 io.github.flattool.Warehouse
-io.github.kolunmi.Bazaar
 io.missioncenter.MissionCenter
 it.mijorus.gearlever
 net.lutris.Lutris
 com.valvesoftware.Steam
 org.fedoraproject.MediaWriter
-org.gnome.Weather
 org.kde.haruna
 org.kde.kate
 org.kde.krita

@@ -9,10 +9,13 @@ setup_2_400_flatpak() {
     step "flatpaks"
 
     # Remove pre-installed flatpaks
+    local all_removals="@@FLATPAKS_REMOVE@@"
     echo "-- remove --"
-    if confirm_yes_no "remove KDE games (kmahjongg, kmines)?"; then
-        to_remove="org.kde.kmahjongg org.kde.kmines"
-    fi
+    for app in $all_removals; do
+        if confirm_yes_no "remove $app?"; then
+            to_remove="$to_remove $app"
+        fi
+    done
 
     if [ -n "$to_remove" ]; then
         echo "Removing: $to_remove"

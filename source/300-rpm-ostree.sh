@@ -19,7 +19,7 @@ setup_2_300_rpm_ostree() {
         read -p "video acceleration driver? [a]md / [i]ntel / [n]one: " gpu_choice < /dev/tty
         case $gpu_choice in
             [Aa]* )
-                selected="$selected mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld"
+                selected="$selected mesa-va-drivers-freeworld"
                 break;;
             [Ii]* )
                 selected="$selected intel-media-driver"

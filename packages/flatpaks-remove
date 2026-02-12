@@ -1,0 +1,5 @@
+# Pre-installed flatpaks to remove
+# One app ID per line, sorted alphabetically
+
+org.kde.kmahjongg
+org.kde.kmines

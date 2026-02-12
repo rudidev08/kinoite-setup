@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=8
+TOTAL_STEPS=6
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))

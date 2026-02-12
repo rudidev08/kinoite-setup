@@ -15,6 +15,9 @@ REPO_VSCODE=$(cat "$DATA_DIR/repos/vscode.repo")
 # Read flatpaks (filter comments/empty lines, join with spaces)
 FLATPAKS=$(grep -v '^#' "$DATA_DIR/flatpaks" | grep -v '^$' | tr '\n' ' ' | sed 's/ $//')
 
+# Read flatpaks to remove (filter comments/empty lines, join with spaces)
+FLATPAKS_REMOVE=$(grep -v '^#' "$DATA_DIR/flatpaks-remove" | grep -v '^$' | tr '\n' ' ' | sed 's/ $//')
+
 # Read appimages (filter comments/empty lines, keep newlines)
 APPIMAGES=$(grep -v '^#' "$DATA_DIR/appimages" | grep -v '^$')
 
@@ -71,6 +74,7 @@ EOF
     # Replace placeholders
     sed -i "s|@@RPM_OSTREE_PACKAGES@@|$RPM_PACKAGES|g" "$output"
     sed -i "s|@@FLATPAKS@@|$FLATPAKS|g" "$output"
+    sed -i "s|@@FLATPAKS_REMOVE@@|$FLATPAKS_REMOVE|g" "$output"
 
     # Replace @@RPM_HOOKS@@ with hooks file content
     awk -v hooks="$(cat "$HOOKS_FILE")" '{gsub(/@@RPM_HOOKS@@/, hooks); print}' "$output" > "$output.tmp" && mv "$output.tmp" "$output"
