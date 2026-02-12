@@ -139,7 +139,7 @@ setup_2_400_flatpak() {
     step "flatpaks"
 
     # Remove pre-installed flatpaks
-    local all_removals="org.kde.kmahjongg org.kde.kmines"
+    local all_removals="org.kde.elisa org.kde.kmahjongg org.kde.kmines org.kde.kwrite"
     echo "-- remove --"
     for app in $all_removals; do
         if confirm_yes_no "remove $app?"; then

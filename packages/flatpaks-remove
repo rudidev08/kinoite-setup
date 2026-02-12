@@ -1,5 +1,9 @@
 # Pre-installed flatpaks to remove
 # One app ID per line, sorted alphabetically
 
+# replaced by org.videolan.VLC
+org.kde.elisa
 org.kde.kmahjongg
 org.kde.kmines
+# replaced by org.kde.kate
+org.kde.kwrite
