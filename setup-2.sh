@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=7
+TOTAL_STEPS=8
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -46,7 +46,7 @@ confirm_yes_no() {
 # PACKAGES and hooks are embedded by build.sh
 
 setup_2_300_rpm_ostree() {
-    local all_packages="1password 1password-cli distrobox fish"
+    local all_packages="1password 1password-cli distrobox fish steam-devices"
     local selected=""
     # Package selection
     for pkg in $all_packages; do
