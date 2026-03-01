@@ -31,7 +31,6 @@ curl -O https://raw.githubusercontent.com/rudidev08/kinoite-setup/refs/heads/mai
   - Adds 1password yum repo if selected
 - Remove pre-installed flatpaks: KMahjongg, KMines
 - Install flatpaks from Flathub: Fastmail, Flatseal, Warehouse, Mission Center, Gear Lever, Lutris, Steam, Fedora Media Writer, Haruna, Kate, Krita, VLC
-- Download Aurora wallpapers from ublue-os/artwork
 - Lists AppImages to download manually: Helium Browser, Obsidian, pCloud, Todoist
 
 Every step prompts for confirmation before running.

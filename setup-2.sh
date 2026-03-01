@@ -5,7 +5,7 @@ sudo -v
 
 # Step counter for progress display
 CURRENT_STEP=0
-TOTAL_STEPS=7
+TOTAL_STEPS=6
 
 step() {
     CURRENT_STEP=$((CURRENT_STEP + 1))
@@ -133,24 +133,6 @@ setup_2_400_flatpak() {
     flatpak install -y --noninteractive flathub $selected
 }
 
-# Aurora wallpapers from ublue-os/artwork
-
-setup_2_410_wallpapers() {
-    step "wallpapers"
-    if confirm_yes_no "install Aurora wallpapers?"; then
-        local dest="$HOME/.local/share/wallpapers"
-        mkdir -p "$dest"
-
-        echo "Downloading Aurora wallpapers..."
-        local tmpdir=$(mktemp -d)
-        curl -sL https://github.com/ublue-os/artwork/archive/refs/heads/main.tar.gz | tar -xz -C "$tmpdir"
-        cp -r "$tmpdir/artwork-main/wallpapers/aurora/"* "$dest/"
-        rm -rf "$tmpdir"
-
-        echo "Wallpapers installed to $dest"
-    fi
-}
-
 
 # run all functions starting with "setup_2"
 for func in $(declare -F | awk '{print $3}' | grep "^setup_2" | sort); do
@@ -162,7 +144,7 @@ echo ""
 echo "Done! AppImages to download:"
 echo ""
 cat << 'APPIMAGES_EOF'
-Helium Browser: https://helium.foundation/download
+Helium Browser: https://helium.computer/download
 Obsidian: https://obsidian.md/download
 pCloud: https://www.pcloud.com/download-free-online-cloud-file-storage.html
 Todoist: https://todoist.com/downloads
