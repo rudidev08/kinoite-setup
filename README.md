@@ -29,8 +29,6 @@ curl -O https://raw.githubusercontent.com/rudidev08/kinoite-setup/refs/heads/mai
 
 - Layer rpm-ostree packages: 1password, 1password-cli, distrobox, fish
   - Adds 1password yum repo if selected
-- AMD or Intel GPU video acceleration drivers with H.264/H.265 codec support (mesa-va-drivers-freeworld or intel-media-driver)
-- Install libavcodec-freeworld for H.264/H.265 codec support
 - Remove pre-installed flatpaks: KMahjongg, KMines
 - Install flatpaks from Flathub: Fastmail, Flatseal, Warehouse, Mission Center, Gear Lever, Lutris, Steam, Fedora Media Writer, Haruna, Kate, Krita, VLC
 - Download Aurora wallpapers from ublue-os/artwork

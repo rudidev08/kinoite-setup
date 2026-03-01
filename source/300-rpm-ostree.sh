@@ -11,29 +11,6 @@ setup_2_300_rpm_ostree() {
         fi
     done
 
-    # GPU drivers (from RPM Fusion)
-    step "GPU drivers"
-    while true; do
-        read -p "video acceleration driver? [a]md / [i]ntel / [n]one: " gpu_choice < /dev/tty
-        case $gpu_choice in
-            [Aa]* )
-                selected="$selected mesa-va-drivers-freeworld"
-                break;;
-            [Ii]* )
-                selected="$selected intel-media-driver"
-                break;;
-            [Nn]* )
-                break;;
-            * )
-                echo "Please enter a, i, or n";;
-        esac
-    done
-
-    # Codecs (from RPM Fusion)
-    if step_confirm "install libavcodec-freeworld (H.264/H.265 codec support)?"; then
-        selected="$selected libavcodec-freeworld"
-    fi
-
     selected=$(echo "$selected" | xargs)
 
     # run package hooks
