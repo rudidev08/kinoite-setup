@@ -146,6 +146,6 @@ echo ""
 cat << 'APPIMAGES_EOF'
 Helium Browser: https://helium.computer/download
 Obsidian: https://obsidian.md/download
-pCloud: https://www.pcloud.com/download-free-online-cloud-file-storage.html
+Tresorit: https://tresorit.com/download
 Todoist: https://todoist.com/downloads
 APPIMAGES_EOF

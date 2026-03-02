@@ -71,22 +71,22 @@ $end_message
 EOF
 
     # Replace placeholders
-    sed -i "s|@@RPM_OSTREE_PACKAGES@@|$RPM_PACKAGES|g" "$output"
-    sed -i "s|@@FLATPAKS@@|$FLATPAKS|g" "$output"
-    sed -i "s|@@FLATPAKS_REMOVE@@|$FLATPAKS_REMOVE|g" "$output"
+    sed "s|@@RPM_OSTREE_PACKAGES@@|$RPM_PACKAGES|g" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
+    sed "s|@@FLATPAKS@@|$FLATPAKS|g" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
+    sed "s|@@FLATPAKS_REMOVE@@|$FLATPAKS_REMOVE|g" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
     # Replace @@RPM_HOOKS@@ with hooks file content
-    awk -v hooks="$(cat "$HOOKS_FILE")" '{gsub(/@@RPM_HOOKS@@/, hooks); print}' "$output" > "$output.tmp" && mv "$output.tmp" "$output"
+    awk 'FNR==NR{hooks=hooks (NR>1?"\n":"") $0; next} {gsub(/@@RPM_HOOKS@@/, hooks); print}' "$HOOKS_FILE" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
     # Replace repo placeholders last (they may be inside hooks) - use awk to avoid escaping issues
-    awk -v repo="$REPO_1PASSWORD" '{gsub(/@@1PASSWORD_REPO@@/, repo); print}' "$output" > "$output.tmp" && mv "$output.tmp" "$output"
+    awk 'FNR==NR{repo=repo (NR>1?"\n":"") $0; next} {gsub(/@@1PASSWORD_REPO@@/, repo); print}' "$DATA_DIR/repos/1password.repo" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
     # Count and replace @@TOTAL_STEPS@@
     # For setup-2: packages + fixed steps (GPU, codecs, flatpaks, wallpapers, fontconfig)
     local num_packages=$(echo $RPM_PACKAGES | wc -w)
     local fixed_steps=$(grep -c 'step "' "$output")  # counts step() calls (not step_confirm in loops)
     local total_steps=$((num_packages + fixed_steps))
-    sed -i "s|@@TOTAL_STEPS@@|$total_steps|g" "$output"
+    sed "s|@@TOTAL_STEPS@@|$total_steps|g" "$output" > "$output.tmp" && mv "$output.tmp" "$output"
 
     chmod +x "$output"
 }
