@@ -90,7 +90,7 @@ EOF
 # FLATPAKS content is embedded by build.sh
 
 setup_2_400_flatpak() {
-    local all_flatpaks="app.devsuite.Ptyxis com.fastmail.Fastmail io.github.dvlv.boxbuddyrs com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
+    local all_flatpaks="com.fastmail.Fastmail io.github.DenysMb.Kontainer com.github.tchx84.Flatseal io.github.Faugus.faugus-launcher io.github.flattool.Warehouse io.missioncenter.MissionCenter it.mijorus.gearlever net.lutris.Lutris com.valvesoftware.Steam org.fedoraproject.MediaWriter org.kde.haruna org.kde.kate org.kde.krita org.videolan.VLC"
     local selected=""
     local to_remove=""
 
